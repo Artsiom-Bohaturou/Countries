@@ -1,0 +1,12 @@
+.results {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 7.5vw;
+}
+
+@media (max-width: 1000px) {
+    .results {
+        grid-template-columns: 1fr;
+    }
+}
