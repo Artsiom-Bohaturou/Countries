@@ -23,7 +23,7 @@ function AboutCountry(props) {
                         </div>
                         <div>
                             <p><strong>Top Level Domain:</strong> {props.topLevelDomain.map((e, i) => i === props.topLevelDomain.length - 1 ? e : `${e}, `)}</p>
-                            <p><strong>Currencies:</strong> {props.currencies.map((e, i) => i === props.currencies.length - 1 ? e.name : `${e.name}, `)}</p>
+                            <p><strong>Currencies:</strong> {props.currencies && props.currencies.map((e, i) => i === props.currencies.length - 1 ? e.name : `${e.name}, `)}</p>
                             <p><strong>Langeages:</strong> {props.languages.map((e, i) => i === props.languages.length - 1 ? e.name : `${e.name}, `)}</p>
                         </div>
                     </span>
