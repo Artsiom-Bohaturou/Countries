@@ -27,7 +27,7 @@ function AboutCountry(props) {
                             <p><strong>Langeages:</strong> {props.languages.map((e, i) => i === props.languages.length - 1 ? e.name : `${e.name}, `)}</p>
                         </div>
                     </span>
-                    <div className="countryBorders"><strong>Border Countries:</strong> {props.borders.map((e, i) => <span className="border" id={id} key={`b${i}`}>{e}</span>)}</div>
+                    <div className="countryBorders"><strong>Border Countries:</strong> {props.borders && props.borders.map((e, i) => <span className="border" id={id} key={`b${i}`}>{e}</span>)}</div>
                 </div>
             </div>
         </div >
