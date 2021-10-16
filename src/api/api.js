@@ -1,20 +1,23 @@
 import * as axios from "axios";
 
+let instanse = axios.create({
+    baseURL: "https://restcountries.com/v2/",
+})
+
 export function getCountriesAPI() {
-    return axios.get("https://restcountries.eu/rest/v2/all", {}).then(response => {
+    return instanse.get("all", {}).then(response => {
         return response.data;
     });
 }
 
 export function searchCountriesAPI(name) {
-    return axios.get(`https://restcountries.eu/rest/v2/name/${name}`, {}).then(response => {
+    return instanse.get(`name/${name}`, {}).then(response => {
         return response.data;
     });
 }
 
 export function filterRegionsAPI(region) {
-    return axios.get(`https://restcountries.eu/rest/v2/region/${region}`, {}).then(response => {
+    return instanse.get(`region/${region}`, {}).then(response => {
         return response.data;
     });
 }
-
