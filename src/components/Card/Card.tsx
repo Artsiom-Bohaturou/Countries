@@ -1,0 +1,39 @@
+import { Card, CardMedia, CardContent, Typography, } from '@mui/material';
+import { countryInfo } from '../../types/types';
+import { Link } from 'react-router-dom';
+
+type props = {
+    elementInfo: countryInfo
+}
+
+const CardComponent = (props: props) => {
+
+    return (
+        <Link to={`country/${props.elementInfo.name.common}`}>
+            <Card sx={{ height: 350, bgcolor: 'primary.main', cursor: 'pointer' }}>
+                <CardMedia
+                    component="img"
+                    height="160"
+                    image={props.elementInfo.flags.png}
+                    alt="Country flag"
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h4">
+                        {props.elementInfo.name.official}
+                    </Typography>
+                    <Typography variant="h6" component="h5">
+                        Population: <Typography color="text.secondary" component="span">{props.elementInfo.population.toLocaleString()}</Typography>
+                    </Typography>
+                    <Typography variant="h6" component="h5">
+                        Region: <Typography color="text.secondary" component="span">{props.elementInfo.region}</Typography>
+                    </Typography>
+                    <Typography variant="h6" component="h5">
+                        Capital: <Typography color="text.secondary" component="span">{props.elementInfo.capital[0]}</Typography>
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Link>
+    );
+}
+
+export default CardComponent;
