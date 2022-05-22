@@ -1,10 +1,11 @@
 import { Grid, Pagination, Box } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { appState } from '../../store/store';
-import { countryInfo } from '../../types/types';
-import Card from '../Card/Card';
-import SearchForm from '../SearchForm/SearchForm';
+import { PaginationBackground } from '../muiStyles/CountriesListStyles';
+import { appState } from '../store/store';
+import { countryInfo } from '../types/types';
+import CountryCard from './CountryCard';
+import SearchForm from './SearchForm';
 
 const CountriesList = () => {
 
@@ -30,11 +31,11 @@ const CountriesList = () => {
                 {currentList && currentList
                     .map((e: countryInfo) => (
                         <Grid key={e.name.common} item xs={12} md={3} sm={6}>
-                            <Card elementInfo={e} />
+                            <CountryCard elementInfo={e} />
                         </Grid>
                     ))}
             </Grid>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <Box sx={PaginationBackground}>
                 <Pagination
                     size='large'
                     page={currentPage}

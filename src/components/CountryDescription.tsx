@@ -2,19 +2,21 @@ import { Typography, Box } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import useCountryInfo from "../../hooks/getCountryInfo";
-import { getCountyBorders } from "../../store/getCountryReducer";
-import { appState } from "../../store/store";
-import BorderComponent from "../BorderComponent/BorderComponent";
-import CountryText from "../CountryText/CountryText";
-import ToMainPageButton from "../ToMainPageButton/ToMainPageButton";
+import useCountryInfo from "../hooks/getCountryInfo";
+import { CountryDescriptionBackground, CountryFlagStyles, TextContainer, TextBackground, BorderListContainer } from "../muiStyles/CountryDescriptionStyles";
+import { getCountyBorders } from "../store/getCountryReducer";
+import { appState } from "../store/store";
+import BorderComponent from "./BorderComponent";
+import CountryInfoText from "./CountryInfoText";
+import ToMainPageButton from "./ToMainPageButton";
 
-const CountryInfo = () => {
+const CountryDescription = () => {
     const { countryName } = useParams();
     const countryInfo = useCountryInfo(countryName);
     const borders = useSelector((state: appState) => state.getCountryReducer.countryBorders);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     useEffect(() => {
         if (countryInfo) {
             dispatch(getCountyBorders(countryInfo.borders.join(',')));
@@ -26,58 +28,59 @@ const CountryInfo = () => {
     return (
         <>
             <ToMainPageButton />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: { md: 'row', xs: 'column' } }}>
+            <Box sx={CountryDescriptionBackground}>
                 <Box>
                     <img
                         src={countryInfo?.flags.svg}
                         alt='Country flag'
                         draggable='false'
-                        style={{ maxWidth: '500px', width: '100%', maxHeight: '400px' }} />
+                        style={CountryFlagStyles} />
                 </Box>
-                <Box sx={{ color: 'text.primary', maxWidth: '700px' }}>
+                <Box sx={TextBackground}>
                     <Typography variant='h4' component='h2'>{countryInfo?.name.official}</Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: { md: 'row', xs: 'column' } }}>
+                    <Box sx={TextContainer}>
                         <Box sx={{ pr: 5 }}>
-                            <CountryText
+                            <CountryInfoText
                                 header='Native Name'
                                 text={countryInfo?.name.nativeName[Object.keys(countryInfo?.name.nativeName)[0]]?.official} />
-                            <CountryText
+                            <CountryInfoText
                                 header='Population'
                                 text={countryInfo?.population.toLocaleString()} />
-                            <CountryText
+                            <CountryInfoText
                                 header='Region'
                                 text={countryInfo?.region} />
-                            <CountryText
+                            <CountryInfoText
                                 header='Sub Region'
                                 text={countryInfo?.subregion} />
-                            <CountryText
+                            <CountryInfoText
                                 header='Capital'
                                 text={countryInfo?.capital.join(', ')} />
                         </Box>
                         <Box>
-                            <CountryText
+                            <CountryInfoText
                                 header='Top Level Domain'
                                 text={countryInfo?.tld.join(', ')} />
-                            <CountryText
+                            <CountryInfoText
                                 header='Currencies'
                                 text={countryInfo && Object.keys(countryInfo?.currencies).map((e) => countryInfo?.currencies[e].name)} />
-                            <CountryText
+                            <CountryInfoText
                                 header='Languages'
                                 text={countryInfo && Object.values(countryInfo?.languages).join(', ')}
                             />
                         </Box>
                     </Box>
-                    <Typography variant='h6' sx={{ mt: 5, display: 'flex', flexWrap: 'wrap' }} component='p'>
-                        Border Countries: {borders ? borders.map((e, i: number) => (
+                    <Box sx={BorderListContainer}>
+                        Border Countries:
+                        {borders ? borders.map((e, i: number) => (
                             <BorderComponent countryName={e.name.common} key={i} />
                         ))
                             : 'None'
                         }
-                    </Typography>
+                    </Box>
                 </Box>
             </Box>
         </>
     );
 }
 
-export default CountryInfo;
+export default CountryDescription;

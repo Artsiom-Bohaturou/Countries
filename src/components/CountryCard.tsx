@@ -1,16 +1,17 @@
 import { Card, CardMedia, CardContent, Typography, } from '@mui/material';
-import { countryInfo } from '../../types/types';
+import { countryInfo } from '../types/types';
 import { Link } from 'react-router-dom';
+import { CardBackground } from '../muiStyles/CountryCardStyles';
 
 type props = {
     elementInfo: countryInfo
 }
 
-const CardComponent = (props: props) => {
+const CountryCard = (props: props) => {
 
     return (
         <Link to={`country/${props.elementInfo.name.common}`}>
-            <Card sx={{ height: 350, bgcolor: 'primary.main', cursor: 'pointer' }}>
+            <Card sx={CardBackground}>
                 <CardMedia
                     component="img"
                     height="160"
@@ -36,4 +37,4 @@ const CardComponent = (props: props) => {
     );
 }
 
-export default CardComponent;
+export default CountryCard;

@@ -12,7 +12,7 @@ const FailLoad = (props: props) => {
 
     return (
         <Box>
-            <Typography sx={{ color: 'text.secondary' }}>Fail to load countries list</Typography>
+            <Typography color='text.secondary'>Fail to load countries list</Typography>
             <Button onClick={onCountryLoadClick} variant="contained">Load again</Button>
         </Box>
     );
